@@ -24,12 +24,14 @@ const server = http.createServer((req, res) => {
     else if (req.url === '/node') {
         res.statusCode = 200;
         res.end("<h1>Welcome to Node js project</h1>");
-}
+    }
     else {
         res.statusCode = 404;
         res.end("<h1>404 Not Found</h1>");
     }
 })
+
+
 
 let port = 3000;
 server.listen(port, () => {
