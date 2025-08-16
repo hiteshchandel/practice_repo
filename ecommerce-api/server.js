@@ -1,11 +1,27 @@
+// const express = require("express");
+// const app = express();
+
+// app.use(express.json());
+
+// app.use("/products", require("./routes/productRoutes"));
+
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
+
+
 const express = require("express");
+const path = require("path");
+
 const app = express();
 
-app.use(express.json());
+// GET endpoint serving HTML
+app.get("/api/products", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "products.html"));
+});
 
-app.use("/products", require("./routes/productRoutes"));
-
-const PORT = process.env.PORT || 3000;
+const PORT = 5000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
