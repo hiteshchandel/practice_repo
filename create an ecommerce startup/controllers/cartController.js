@@ -1,11 +1,23 @@
-// controllers/cartController.js
+const cartService = require("../services/cartService");
 
-// GET /cart/:userId
-exports.getCartForUser = (req, res) => {
-  res.send(`Fetching cart for user with ID: ${req.params.userId}`);
+exports.getCartForUser = (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    if (!userId) throw { statusCode: 400, message: "User ID is required" };
+    const result = cartService.getCartForUser(userId);
+    res.send(result);
+  } catch (err) {
+    next(err);
+  }
 };
 
-// POST /cart/:userId
-exports.addProductToCart = (req, res) => {
-  res.send(`Adding product to cart for user with ID: ${req.params.userId}`);
+exports.addProductToCart = (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    if (!userId) throw { statusCode: 400, message: "User ID is required" };
+    const result = cartService.addProductToCart(userId);
+    res.send(result);
+  } catch (err) {
+    next(err);
+  }
 };

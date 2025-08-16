@@ -1,16 +1,30 @@
-// controllers/userController.js
+const userService = require("../services/userService");
 
-// GET /users
-exports.getAllUsers = (req, res) => {
-  res.send("Fetching all users");
+exports.getAllUsers = (req, res, next) => {
+  try {
+    const result = userService.getAllUsers();
+    res.send(result);
+  } catch (err) {
+    next(err);
+  }
 };
 
-// POST /users
-exports.addUser = (req, res) => {
-  res.send("Adding a new user");
+exports.getUserById = (req, res, next) => {
+  try {
+    const { id } = req.params;
+    if (!id) throw { statusCode: 400, message: "User ID is required" };
+    const result = userService.getUserById(id);
+    res.send(result);
+  } catch (err) {
+    next(err);
+  }
 };
 
-// GET /users/:id
-exports.getUserById = (req, res) => {
-  res.send(`Fetching user with ID: ${req.params.id}`);
+exports.addUser = (req, res, next) => {
+  try {
+    const result = userService.addUser();
+    res.send(result);
+  } catch (err) {
+    next(err);
+  }
 };

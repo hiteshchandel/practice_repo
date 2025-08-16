@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>Add a Product</h1>
+    <form id="productForm">
+        <label for="product">Product Name:</label>
+        <input type="text" id="product" name="productName" required>
+        <button type="submit">Add Product</button>
+    </form>
+
+    <p id="response"></p>
+
+    <script>
+        const form = document.getElementById("productForm");
+        const responsePara = document.getElementById("response");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const productName = document.getElementById("product").value;
+
+            axios.post("/products", { productName })
+                .then(res => {
+                    console.log(res.data);
+                    responsePara.textContent = res.data;
+                })
+                .catch(err => {
+                    console.error(err);
+                    responsePara.textContent = err.response.data.message;
+                });
+        });
+    </script>
+</body>
+
+</html>
