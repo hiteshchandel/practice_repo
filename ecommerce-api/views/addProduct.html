@@ -15,7 +15,7 @@
 
 
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -30,6 +30,50 @@
         <input type="text" id="product" name="productName" required>
         <button type="submit">Add Product</button>
     </form>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>Add a Product</h1>
+    <form id="productForm">
+        <label for="product">Product Name:</label>
+        <input type="text" id="product" name="productName" required>
+        <button type="submit">Add Product</button>
+    </form>
+
+    <p id="response"></p>
+
+    <script>
+        const form = document.getElementById("productForm");
+        const responsePara = document.getElementById("response");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // prevent default form submission
+
+            const productName = document.getElementById("product").value;
+
+            // Send POST request using Axios
+            axios.post("/api/products", { productName })
+                .then(res => {
+                    console.log(res.data); // logs data on server response
+                    responsePara.textContent = res.data.message; // show response on page
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        });
+    </script>
 </body>
 
 </html>
