@@ -11,17 +11,43 @@
 // });
 
 
+// const express = require("express");
+// const path = require("path");
+
+// const app = express();
+
+// // GET endpoint serving HTML
+// app.get("/api/products", (req, res) => {
+//   res.sendFile(path.join(__dirname, "views", "products.html"));
+// });
+
+// const PORT = 5000;
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
+
+
 const express = require("express");
 const path = require("path");
 
 const app = express();
 
-// GET endpoint serving HTML
+// Middleware to parse form data
+app.use(express.urlencoded({ extended: true }));
+
+// GET endpoint serving HTML form
 app.get("/api/products", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "products.html"));
+  res.sendFile(path.join(__dirname, "views", "addProduct.html"));
+});
+
+// POST endpoint to handle form submission
+app.post("/api/products", (req, res) => {
+  const productName = req.body.productName;
+  res.send(`Product "${productName}" added successfully!`);
 });
 
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
