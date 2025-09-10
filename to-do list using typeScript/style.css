@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+li.completed span {
+    /* text-decoration: line-through; */
+    color: rgb(156, 168, 169);
+}
+
+button {
+    margin-left: 10px;
+}
